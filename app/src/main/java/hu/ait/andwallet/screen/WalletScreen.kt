@@ -113,7 +113,7 @@ fun WalletScreen(
             }
         }
         if (walletViewModel.getAllItems().isEmpty())
-            Text(text = "No items")
+            Text(text = "No items", modifier = Modifier.padding(5.dp))
         else {
             LazyColumn(modifier = Modifier.fillMaxHeight()) {
                 items(walletViewModel.getAllItems()) {
