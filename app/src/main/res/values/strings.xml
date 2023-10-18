@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">AndWallet</string>
+    <string name="amount_error_text">This field can be number only</string>
+    <string name="title_error_text">Please enter a title</string>
+    <string name="title_field_label">"Enter type: "</string>
+    <string name="amount_field_label">"Enter amount: "</string>
+    <string name="income_cb_label">Income</string>
+    <string name="save_btn_text">Save</string>
+    <string name="summary_btn_text">Summary</string>
+    <string name="delete_all_btn_text">Delete All</string>
+    <string name="no_items_text">No items</string>
+    <string name="expenses_text">Expenses: %1$s</string>
+    <string name="income_text">Income: %1$s</string>
+    <string name="balance_text">Balance: %1$s</string>
 </resources>

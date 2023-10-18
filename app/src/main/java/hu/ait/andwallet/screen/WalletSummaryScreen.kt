@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import hu.ait.andwallet.R
 
 @Composable
 fun WalletSummaryScreen(
@@ -21,21 +23,22 @@ fun WalletSummaryScreen(
     numexpense: Int,
     numincome: Int
     ) {
-    Column(modifier = modifier.fillMaxSize()
+    Column(modifier = modifier
+        .fillMaxSize()
         .padding(start = 40.dp, end = 40.dp), verticalArrangement = Arrangement.Center) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
             Text(
-                text = "Expenses: ${numexpense}",
+                text = stringResource(R.string.expenses_text, numexpense),
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth(),
                 textAlign = TextAlign.Left
             )
             Text(
-                text = "Income: $numincome",
+                text = stringResource(R.string.income_text, numincome),
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxWidth(),
@@ -52,7 +55,7 @@ fun WalletSummaryScreen(
         )
 
         Text(
-            text = "Balance: ${numincome - numexpense}",
+            text = stringResource(R.string.balance_text, numincome - numexpense),
             modifier = Modifier
                 .fillMaxWidth(),
             textAlign = TextAlign.Center

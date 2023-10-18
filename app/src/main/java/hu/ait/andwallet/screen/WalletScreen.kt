@@ -37,11 +37,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import hu.ait.andwallet.R
 import hu.ait.andwallet.data.MoneyItem
 import hu.ait.andwallet.data.MoneyType
-
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,6 +53,8 @@ fun WalletScreen(
     walletViewModel: WalletViewModel = viewModel(),
     onNavigateToSummary: (Int, Int) -> Unit
 ) {
+    var context = LocalContext.current
+
     var moneyItemTitle by rememberSaveable {
         mutableStateOf("")
     }
@@ -74,14 +79,14 @@ fun WalletScreen(
 
     fun validate(text: String) {
         val allDigits = text.all { char -> char.isDigit() }
-        amountErrorText = "This field can be number only"
+        amountErrorText = context.getString(R.string.amount_error_text)
         amountErrorState = !allDigits
     }
 
     fun validateTitle(text: String) {
         if (text.trim() == "") {
             titleErrorState = true
-            titleErrorText = "Please enter a title"
+            titleErrorText = context.getString(R.string.title_error_text)
         } else {
             titleErrorState = false
         }
@@ -107,7 +112,7 @@ fun WalletScreen(
                     moneyItemTitle = it
                     validateTitle(moneyItemTitle)},
                 singleLine = true,
-                label = { Text(text = "Enter type: ") })
+                label = { Text(text = stringResource(R.string.title_field_label)) })
 
             Spacer(modifier = Modifier.fillMaxSize(0.02f))
             OutlinedTextField(
@@ -127,7 +132,7 @@ fun WalletScreen(
                     moneyItemAmount = it
                     validate(moneyItemAmount)},
                 singleLine = true,
-                label = { Text(text = "Enter amount: ") })
+                label = { Text(text = stringResource(R.string.amount_field_label)) })
         }
         Row(verticalAlignment = Alignment.CenterVertically) {
             if (titleErrorState) {
@@ -153,7 +158,7 @@ fun WalletScreen(
             Checkbox(checked = isIncome, onCheckedChange = {
                 isIncome = it
             })
-            Text(text = "Income")
+            Text(text = stringResource(R.string.income_cb_label))
         }
         Row(modifier = Modifier.fillMaxWidth(0.8f), horizontalArrangement = Arrangement.SpaceAround) {
             Button(onClick = {
@@ -175,7 +180,7 @@ fun WalletScreen(
                     }
                 }
             }) {
-                Text(text = "Save")
+                Text(text = stringResource(R.string.save_btn_text))
             }
             Button(onClick = {
                 onNavigateToSummary(
@@ -183,16 +188,16 @@ fun WalletScreen(
                     walletViewModel.getIncome()
                 )
             }) {
-                Text(text = "Summary")
+                Text(text = stringResource(R.string.summary_btn_text))
             }
             Button(onClick = {
                 walletViewModel.clearAllItems()
             }) {
-                Text(text = "Delete All")
+                Text(text = stringResource(R.string.delete_all_btn_text))
             }
         }
         if (walletViewModel.getAllItems().isEmpty())
-            Text(text = "No items", modifier = Modifier.padding(5.dp))
+            Text(text = stringResource(R.string.no_items_text), modifier = Modifier.padding(5.dp))
         else {
             LazyColumn(modifier = Modifier.fillMaxHeight()) {
                 items(walletViewModel.getAllItems()) {

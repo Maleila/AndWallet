@@ -40,11 +40,6 @@ class WalletViewModel: ViewModel() {
         _moneyList.remove(moneyItem)
     }
 
-    fun editMoneyItem(originalMoneyItem: MoneyItem, editedMoneyItem: MoneyItem) {
-        val index = _moneyList.indexOf(originalMoneyItem)
-        _moneyList[index] = editedMoneyItem
-    }
-
     fun clearAllItems() {
         _moneyList.clear()
     }
