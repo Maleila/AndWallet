@@ -44,7 +44,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import hu.ait.andwallet.R
 import hu.ait.andwallet.data.MoneyItem
 import hu.ait.andwallet.data.MoneyType
-import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -103,7 +102,7 @@ fun WalletScreen(
                 trailingIcon = {
                     if (titleErrorState) {
                         Icon(
-                            Icons.Filled.Warning, "error",
+                            Icons.Filled.Warning, stringResource(R.string.error_content_desc),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -123,7 +122,7 @@ fun WalletScreen(
                 trailingIcon = {
                     if (amountErrorState) {
                         Icon(
-                            Icons.Filled.Warning, "error",
+                            Icons.Filled.Warning, stringResource(R.string.error_content_desc),
                             tint = MaterialTheme.colorScheme.error
                         )
                     }
@@ -162,6 +161,8 @@ fun WalletScreen(
         }
         Row(modifier = Modifier.fillMaxWidth(0.8f), horizontalArrangement = Arrangement.SpaceAround) {
             Button(onClick = {
+                validateTitle(moneyItemTitle)
+                validate(moneyItemAmount)
                 if(!titleErrorState && !amountErrorState){
                     try {
                         walletViewModel.addToMoneyList(
@@ -176,7 +177,6 @@ fun WalletScreen(
                         moneyItemAmount = ""
                     } catch (e: Exception) {
                         amountErrorState = true
-                        //errorText = e.message!!
                     }
                 }
             }) {
@@ -234,7 +234,7 @@ fun MoneyItemCard(
             Row(Modifier.fillMaxWidth(0.9f)) {
                 Image(
                     painter = painterResource(id = moneyItem.type.getIcon()),
-                    contentDescription = "Type",
+                    contentDescription = stringResource(R.string.type_content_desc),
                     modifier = Modifier
                         .size(40.dp)
                         .padding(end = 10.dp)
@@ -247,7 +247,7 @@ fun MoneyItemCard(
             }
             Icon(
                 imageVector = Icons.Filled.Delete,
-                contentDescription = "Delete",
+                contentDescription = stringResource(R.string.delete_content_desc),
                 modifier = Modifier.clickable {
                     onRemoveItem()
                 },

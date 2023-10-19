@@ -6,16 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import hu.ait.andwallet.screen.LoginScreen
 import hu.ait.andwallet.screen.WalletScreen
 import hu.ait.andwallet.screen.WalletSummaryScreen
 import hu.ait.andwallet.ui.theme.AndWalletTheme
@@ -41,11 +40,14 @@ class MainActivity : ComponentActivity() {
 fun AndWalletNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = "walletscreen"
+    startDestination: String = "loginscreen"
 ) {
     NavHost(
         modifier = modifier, navController = navController, startDestination = startDestination
     ) {
+        composable("loginscreen") { LoginScreen(
+            onNavigateToWallet = { -> navController.navigate("walletscreen")}
+            )}
         composable("walletscreen") { WalletScreen(
             onNavigateToSummary = {expense, income ->
             navController.navigate("walletsummary/$expense/$income")

@@ -12,4 +12,9 @@
     <string name="expenses_text">Expenses: %1$s</string>
     <string name="income_text">Income: %1$s</string>
     <string name="balance_text">Balance: %1$s</string>
+    <string name="enter_pin_text">Enter PIN</string>
+    <string name="submit_btn_text">Submit</string>
+    <string name="type_content_desc">Type</string>
+    <string name="delete_content_desc">Delete</string>
+    <string name="error_content_desc">error</string>
 </resources>
