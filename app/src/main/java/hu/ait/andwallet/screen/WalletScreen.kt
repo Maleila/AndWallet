@@ -231,18 +231,20 @@ fun MoneyItemCard(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(
-                painter = painterResource(id = moneyItem.type.getIcon()),
-                contentDescription = "Type",
-                modifier = Modifier
-                    .size(40.dp)
-                    .padding(end = 10.dp)
-            )
-            Column{
-                Text(moneyItem.title)
-                Text("$${moneyItem.amount}")
+            Row(Modifier.fillMaxWidth(0.9f)) {
+                Image(
+                    painter = painterResource(id = moneyItem.type.getIcon()),
+                    contentDescription = "Type",
+                    modifier = Modifier
+                        .size(40.dp)
+                        .padding(end = 10.dp)
+                )
+                Column{
+                    Text(moneyItem.title)
+                    Text("$${moneyItem.amount}")
+                }
+                Spacer(modifier = Modifier.fillMaxSize(0.8f))
             }
-            Spacer(modifier = Modifier.fillMaxSize(0.8f))
             Icon(
                 imageVector = Icons.Filled.Delete,
                 contentDescription = "Delete",
